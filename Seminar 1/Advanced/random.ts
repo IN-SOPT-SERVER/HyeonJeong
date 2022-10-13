@@ -50,8 +50,8 @@ const dinner: Dinner = {
         this.shuffle(members);
         this.shuffle(menu);
 
-        const yb = members.find((members) => members.group === 'yb') as Member;
-        const ob = members.find((members) => members.group === 'ob') as Member;
+        const yb = members.find((members) => members.group === 'yb') ?? '';
+        const ob = members.find((members) => members.group === 'ob') ?? '';
 
         if (yb && ob) {
             const dinnerMember: string[] = [];
