@@ -6,7 +6,7 @@ const router: Router = express.Router(); // express의 라우팅 시스템
 //http://localhost:3000/api/user 로 이동함
 router.get("/", (req: Request, res: Response) => { // GET ~/~로 요청이 들어온다면
     const user = "하이";
-    return res.status(200).json({ //여기 있는 로직 수행
+    return res.status(200).json({ //여기 있는 로직 수행(json 형태로 제공됨)
         status: 200,
         message: "유저 조회 성공",
         data: user
