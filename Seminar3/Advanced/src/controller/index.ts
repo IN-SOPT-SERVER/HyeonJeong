@@ -1,4 +1,4 @@
-import seriesController from "./seriesController"
+import seriesController from "./SeriesController"
 
 export {
     seriesController

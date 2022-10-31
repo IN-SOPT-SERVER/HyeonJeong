@@ -15,8 +15,10 @@ interface SeriesInterface {
         actor: string[];
         genre: string[];
         characteristic: string[];
-        isLiked: boolean;
+    },
+    userInfo: {
         isBookMark: boolean;
+        evalNum: number;
     },
     addInfo: {
         year: number;

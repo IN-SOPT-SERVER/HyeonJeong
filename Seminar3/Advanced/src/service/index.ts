@@ -1,3 +1,3 @@
-import seriesService from "./seriesService";
+import seriesService from "./SeriesService";
 
 export { seriesService };

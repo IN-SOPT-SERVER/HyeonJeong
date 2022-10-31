@@ -12,9 +12,11 @@ export const series: Series = {
         workInfo: {
             actor: ['하정우', '박해수', '황정민', '조우진', '유연석'],
             genre: ['공포', '스릴러'],
-            characteristic: ['긴장감 넘치는'],
-            isLiked: false,
-            isBookMark: false
+            characteristic: ['긴장감 넘치는']
+        },
+        userInfo: {
+            isBookMark: false,
+            evalNum: 0
         },
         addInfo: {
             year: 2022,
@@ -37,9 +39,11 @@ export const series: Series = {
         workInfo: {
             actor: ['하정우', '박해수', '황정민', '조우진', '유연석'],
             genre: ['공포', '스릴러'],
-            characteristic: ['긴장감 넘치는'],
-            isLiked: false,
-            isBookMark: false
+            characteristic: ['긴장감 넘치는']
+        },
+        userInfo: {
+            isBookMark: false,
+            evalNum: 1
         },
         addInfo: {
             year: 2022,
