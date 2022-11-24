@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import seriesRouter from "./seriesRouter"
+import seriesRouter from "../../../../Seminar6/Advanced/src/router/seriesRouter"
 const router: Router = express.Router();
 
 router.use("/series", seriesRouter);
