@@ -31,4 +31,9 @@ export default {
   INTERNAL_SERVER_ERROR: "서버 내 오류",
 
   INVALID_PASSWORD: "잘못된 비밀번호입니다.",
+
+  // 시리즈
+  GET_SERIES_SUCCESS: "시리즈 정보 조회 성공",
+  DELETE_LIKE_SUCCESS: "찜한 에피소드 취소 성공",
+  GET_LIKE_SUCCESS: "찜한 에피소드 조회 성공"
 };

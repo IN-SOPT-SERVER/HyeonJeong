@@ -3,9 +3,13 @@ import { seriesController } from '../controller';
 
 const router: Router = express.Router();
 
-router.get('/:seriesId', seriesController.getSeries);
-router.post('/isEvaluate/:seriesId', seriesController.postEvaluate);
-router.post('/toMyList/:seriesId', seriesController.postMyList);
-router.delete('/notMyList/:seriesId', seriesController.deleteMyList);
+//* 시리즈 조회 GET /series?episodeNumber=1&workId=1
+router.get('/', seriesController.getSeries);
+
+//* 찜한 콘텐츠 추가 POST /series/:userId/:workId/:episodeNumber
+router.post('/:userId/:workId/:episodeId', seriesController.postLike);
+
+//* 찜한 콘텐츠 취소 DELETE /series/:userId/:workId/:episodeNumber
+router.delete('/:userId/:workId/:episodeId', seriesController.deleteMyList);
 
 export default router;

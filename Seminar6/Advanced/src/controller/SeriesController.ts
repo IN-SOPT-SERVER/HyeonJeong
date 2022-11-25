@@ -1,80 +1,95 @@
 import express, { Request, Response } from "express";
 import seriesService from "../service/SeriesService";
+import statuscode from "../constants/statusCode";
+import message from "../constants/responseMessage";
 
+//* 시리즈 조회
 const getSeries = async (req: Request, res: Response) => {
-    const { seriesId } = req.params;
+    const episodeNumber = req.query.episodeNumber;
+    const workId = req.query.workId;
 
-    const data = await seriesService.getSeries(seriesId);
+    try {
+        if (!episodeNumber || !workId) {
+            return res.status(statuscode.BAD_REQUEST).json({ status: statuscode.BAD_REQUEST, message: message.NOT_FOUND });
+        }
+        const data = await seriesService.getSeries(+episodeNumber, +workId);
 
-    if (!data) {
-        return res.status(404).json({
-            status: 404,
-            message: "Not Found"
+        if (!data) {
+            return res.status(statuscode.NOT_FOUND).json({
+                status: statuscode.NOT_FOUND,
+                message: message.NOT_FOUND
+            });
+        }
+
+        return res.status(statuscode.OK).json({
+            status: statuscode.OK,
+            message: message.GET_SERIES_SUCCESS,
+            data
         });
+
+    } catch (err) {
+        return res.status(statuscode.INTERNAL_SERVER_ERROR).json({ status: statuscode.INTERNAL_SERVER_ERROR, message: message.INTERNAL_SERVER_ERROR });
     }
 
-    return res.status(200).json({
-        status: 200,
-        message: "series 정보 조회",
-        data
-    });
 };
 
-const postEvaluate = async (req: Request, res: Response) => {
-    const { seriesId } = req.params;
-    const { evalNum } = req.body;
+//* 찜한 콘텐츠 추가
+const postLike = async (req: Request, res: Response) => {
+    const { userId, workId, episodeId } = req.params;
 
-    const data = await seriesService.postEvaluate(seriesId, evalNum);
+    const data = await seriesService.postLike(+workId, +userId);
 
     if (!data) {
-        return res.status(404).json({
-            status: 404,
-            message: "Not Found"
+        return res.status(statuscode.NOT_FOUND).json({
+            status: statuscode.NOT_FOUND,
+            message: message.NOT_FOUND
         });
     }
 
-    return res.status(200).json({
-        status: 200,
-        message: `successful evaluation : ${data.userInfo.evalNum}`
+    return res.status(statuscode.OK).json({
+        status: statuscode.OK,
+        message: `successful like : ${data.workId}`
     });
 }
 
-const postMyList = async (req: Request, res: Response) => {
-    const { seriesId } = req.params;
-
-    const data = await seriesService.postMyList(seriesId);
-
-    if (!data) {
-        return res.status(404).json({
-            status: 404,
-            message: "Not Found"
-        });
-    }
-
-    return res.status(200).json({
-        status: 200,
-        message: "북마크에 저장 성공"
-    });
-
-}
-
+//* 찜한 콘텐츠 취소
 const deleteMyList = async (req: Request, res: Response) => {
-    const { seriesId } = req.params;
+    console.log("d[d")
+    const { userId, workId, episodeId } = req.params;
 
-    const data = await seriesService.deleteMyList(seriesId);
+    const data = await seriesService.deleteMyList(+workId, +userId);
 
     if (!data) {
-        return res.status(404).json({
-            status: 404,
-            message: "Not Found"
+        return res.status(statuscode.NOT_FOUND).json({
+            status: statuscode.NOT_FOUND,
+            message: "message.NOT_FOUND"
         });
     }
 
-    return res.status(200).json({
-        status: 200,
-        message: "북마크에서 삭제"
+    return res.status(statuscode.OK).json({
+        status: statuscode.OK,
+        message: message.DELETE_LIKE_SUCCESS
     });
 
 }
 
-export default { getSeries, postEvaluate, postMyList, deleteMyList };
+//* 찜한 컨텐츠 조회
+const getLike = async (req: Request, res: Response) => {
+    const { userId } = req.params;
+
+    const data = await seriesService.getLike(+userId);
+
+    if (!data) {
+        return res.status(statuscode.NOT_FOUND).json({
+            status: statuscode.NOT_FOUND,
+            message: "message.NOT_FOUND"
+        });
+    }
+    return res.status(statuscode.OK).json({
+        status: statuscode.OK,
+        message: message.GET_LIKE_SUCCESS,
+        data
+    });
+}
+
+export default { getSeries, postLike, deleteMyList, getLike };
