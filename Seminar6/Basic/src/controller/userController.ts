@@ -73,8 +73,8 @@ const signInUser = async (req: Request, res: Response) => {
 
 //* 유저 전체 조회
 const getAllUser = async (req: Request, res: Response) => {
-
-  const data = await userService.getAllUser();
+  const { page, limit } = req.query;
+  const data = await userService.getAllUser(Number(page), Number(limit));
 
   return res.status(200).json({ status: 200, message: "유저 조회 성공", data });
 };
@@ -111,6 +111,20 @@ const getUserById = async (req: Request, res: Response) => {
   return res.status(200).json({ status: 200, message: "유저 조회 성공", data });
 };
 
+//* GET ~api/user?keyword=현정
+const searchUserByName = async (req: Request, res: Response) => {
+  const { keyword, option } = req.query; // query에 있는거 꺼내옴
+
+  const data = await userService.searchUserByName(keyword as string, option as string);
+
+  if (!data) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.SEARCH_USER_FAIL));
+  }
+
+  return res.status(sc.OK).send(success(sc.OK, rm.SEARCH_USER_SUCCESS, data));
+
+}
+
 const userController = { // export 할거 따로 변수로 만들고 export 해주기 
   createUser,
   signInUser,
@@ -118,6 +132,7 @@ const userController = { // export 할거 따로 변수로 만들고 export 해�
   updateUser,
   deleteUser,
   getUserById,
+  searchUserByName,
 };
 
 

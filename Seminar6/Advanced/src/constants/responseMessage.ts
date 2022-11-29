@@ -35,5 +35,16 @@ export default {
   // 시리즈
   GET_SERIES_SUCCESS: "시리즈 정보 조회 성공",
   DELETE_LIKE_SUCCESS: "찜한 에피소드 취소 성공",
-  GET_LIKE_SUCCESS: "찜한 에피소드 조회 성공"
+  GET_LIKE_SUCCESS: "찜한 에피소드 조회 성공",
+
+  // 이미지
+  NO_IMAGE: "이미지가 없습니다",
+
+  // 작품
+  CREATE_WORK_SUCCESS: "작품 생성 성공",
+  CREATE_WORK_FAIL: "작품 생성 실패",
+  GET_WORK_BY_NAME_SUCCESS: "작품 검색 성공",
+  GET_WORK_BY_NAME_FAIL: "작품 검색 실패",
+  GET_WORK_SUCCESS: "작품 전체 조회 성공",
+  GET_WORK_FAIL: "작품 전체 조회 실패",
 };

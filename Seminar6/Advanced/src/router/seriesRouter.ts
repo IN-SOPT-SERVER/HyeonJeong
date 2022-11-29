@@ -12,4 +12,5 @@ router.post('/:userId/:workId/:episodeId', seriesController.postLike);
 //* 찜한 콘텐츠 취소 DELETE /series/:userId/:workId/:episodeNumber
 router.delete('/:userId/:workId/:episodeId', seriesController.deleteMyList);
 
+
 export default router;

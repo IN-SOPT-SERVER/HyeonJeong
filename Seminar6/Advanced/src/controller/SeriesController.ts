@@ -54,7 +54,6 @@ const postLike = async (req: Request, res: Response) => {
 
 //* 찜한 콘텐츠 취소
 const deleteMyList = async (req: Request, res: Response) => {
-    console.log("d[d")
     const { userId, workId, episodeId } = req.params;
 
     const data = await seriesService.deleteMyList(+workId, +userId);

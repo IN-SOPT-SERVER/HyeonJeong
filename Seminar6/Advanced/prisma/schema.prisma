@@ -8,37 +8,46 @@ datasource db {
 }
 
 model User {
-  id       Int        @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
-  userName String     @db.VarChar(100)
-  age      Int?
-  email    String     @db.VarChar(400)
-  password String     @db.VarChar(400)
-  LikeWork LikeWork[]
+  id        Int        @id(map: "user_pk") @unique(map: "user_id_uindex") @default(autoincrement())
+  userName  String     @db.VarChar(100)
+  age       Int?
+  email     String     @db.VarChar(400)
+  password  String     @db.VarChar(400)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  LikeWork  LikeWork[]
 }
 
 model LikeWork {
-  id     Int  @id @default(autoincrement())
-  workId Int
-  userId Int
-  User   User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "likework_user_id_fk")
-  Work   Work @relation(fields: [workId], references: [id], onDelete: Cascade, map: "likework_work_id_fk")
+  id        Int      @id @default(autoincrement())
+  workId    Int
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "likework_user_id_fk")
+  Work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade, map: "likework_work_id_fk")
 }
 
 model Work {
-  id       Int        @id @default(autoincrement())
-  workName String?    @db.VarChar(100)
-  genre    String?    @db.VarChar(100)
-  ageLimit Int?
-  Episode  Episode[]
-  LikeWork LikeWork[]
+  id        Int        @id @default(autoincrement())
+  workName  String?    @db.VarChar(100)
+  genre     String?    @db.VarChar(100)
+  ageLimit  Int?
+  image     String?    @db.VarChar(800)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Episode   Episode[]
+  LikeWork  LikeWork[]
 }
 
 model Episode {
-  id            Int     @id @unique(map: "Series_id_key") @default(autoincrement())
-  EpisodeNumber Int     @default(1)
+  id            Int      @id @unique(map: "Series_id_key") @default(autoincrement())
+  EpisodeNumber Int      @default(1)
   content       String?
   runningTime   Int?
   watchingTime  Int?
   workId        Int
-  Work          Work    @relation(fields: [workId], references: [id], onDelete: Cascade, map: "episode_work_id_fk")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  Work          Work     @relation(fields: [workId], references: [id], onDelete: Cascade, map: "episode_work_id_fk")
 }
